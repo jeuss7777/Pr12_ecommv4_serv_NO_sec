@@ -1,5 +1,7 @@
 package com.jarana.service;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import com.jarana.entities.PoDetail;
 public interface PoDetailService {
@@ -10,4 +12,6 @@ public interface PoDetailService {
 	public void update (PoDetail podetail);
 	public void delete (PoDetail podetail);
 	public List<PoDetail> findPODetailBySku(Long paSkuNb);
+	
+	public Map<Long, BigDecimal> priceTest();
 }

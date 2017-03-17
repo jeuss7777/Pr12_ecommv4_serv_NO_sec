@@ -67,31 +67,36 @@ public class PoDetailController {
 	@RequestMapping(value = "/balance", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<Long, BigDecimal> priceTest(){
-		
-		final Map<Long, BigDecimal> result = new HashMap<>();
-		
-		final List<PoDetail> poddetails = podetailService.findAll();
-		for(PoDetail poDetail : poddetails){
-			Long sku = poDetail.getPart().getPaSkuNb();
-			if(!result.containsKey(sku)){
-				result.put(sku, poDetail.calculatePoPrice());
-			}
-			else{
-				result.put(sku, result.get(sku).add(poDetail.calculatePoPrice()));
-			}
-		}
-		
-		final List<InvoiceDetail> invoices = invoiceDetailService.findAll();
-		for(InvoiceDetail invoiceDetail : invoices){
-			Long sku = invoiceDetail.getPart().getPaSkuNb();
-			if(!result.containsKey(sku)){
-				result.put(sku, invoiceDetail.calculateInvPrice());
-			}
-			else{
-				result.put(sku, result.get(sku).subtract(invoiceDetail.calculateInvPrice()));
-			}
-		}
-		
-		return result;
+		return podetailService.priceTest();
 	}
+//	@RequestMapping(value = "/balance", method = RequestMethod.GET)
+//	@ResponseBody
+//	public Map<Long, BigDecimal> priceTest(){
+//		
+//		final Map<Long, BigDecimal> result = new HashMap<>();
+//		
+//		final List<PoDetail> poddetails = podetailService.findAll();
+//		for(PoDetail poDetail : poddetails){
+//			Long sku = poDetail.getPart().getPaSkuNb();
+//			if(!result.containsKey(sku)){
+//				result.put(sku, poDetail.calculatePoPrice());
+//			}
+//			else{
+//				result.put(sku, result.get(sku).add(poDetail.calculatePoPrice()));
+//			}
+//		}
+//		
+//		final List<InvoiceDetail> invoices = invoiceDetailService.findAll();
+//		for(InvoiceDetail invoiceDetail : invoices){
+//			Long sku = invoiceDetail.getPart().getPaSkuNb();
+//			if(!result.containsKey(sku)){
+//				result.put(sku, invoiceDetail.calculateInvPrice());
+//			}
+//			else{
+//				result.put(sku, result.get(sku).subtract(invoiceDetail.calculateInvPrice()));
+//			}
+//		}
+//		
+//		return result;
+//	}
 }
